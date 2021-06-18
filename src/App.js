@@ -1,25 +1,75 @@
-import logo from './logo.svg';
+
 import './App.css';
+//import Token from './Token'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Navigation from './Navigation';
+import Cards from "./Cards"
+import firebase from "./Firebase"
+import {app} from "./Firebase"
+import Popup from './Popup'
+import { useEffect, useState} from "react"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+ 
+  const db = firebase.firestore(app).collection("auth");
+  const [user, setUser] = useState([]);
+  
+  
+    // [START listen_document]
+  function unsub() {
+    db.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setUser(items);
+      console.log(user)
+    });
+  
+ }
+             
+            
+            
 
+ 
+  
+  
+
+    
+
+ useEffect(() => {
+   unsub();
+
+ },[])
+    
+ 
+  
+  
+  
+  return (
+ <div>
+   <Navigation className='umar'/>
+   <Container style={{position: 'relative', zIndex: '1', paddingTop:'90px'}} fluid>
+  <Row>
+    <Col>
+    
+     {user.map(p => {
+       return (<div >
+       <Cards title = {p.product}
+              user  = {p.user}
+              token = {p.code}
+              key = {p.id}/>
+       </div>)
+       }
+       )}
+     
+   </Col>
+  </Row>
+  <Popup />
+</Container>
+ </div>
+  )
+}
 export default App;
