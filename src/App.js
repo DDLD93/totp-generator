@@ -1,6 +1,5 @@
 
 import './App.css';
-//import Token from './Token'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -15,19 +14,16 @@ function App() {
  
   const db = firebase.firestore(app).collection("auth");
   const [user, setUser] = useState([]);
+  var key = ['qaugcothk42nv5tklz2v4l6s6h22iia','qaugcothk42nm5tklv2v4l6s6h22iia','baugcothk42nm5tklz2v4l6s6h22iia']
   
   
     // [START listen_document]
   function unsub() {
-    db.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setUser(items);
-      console.log(user)
-    });
-  
+    fetch(`http://localhost:5500/auth/${key}`).then((response) => {
+      //var temdata = JSON.parse(response)
+     console.log(response.text());
+      
+    })
  }
              
             
