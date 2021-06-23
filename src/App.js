@@ -14,21 +14,46 @@ function App() {
  
   const db = firebase.firestore(app).collection("auth");
   const [user, setUser] = useState([]);
-  var key = ['qaugcothk42nv5tklz2v4l6s6h22iia','qaugcothk42nm5tklv2v4l6s6h22iia','baugcothk42nm5tklz2v4l6s6h22iia']
+  const [coder, setcoder] = useState([]);
   
+ 
   
-    // [START listen_document]
-  function unsub() {
-    fetch(`http://localhost:5500/auth/${key}`).then((response) => {
+  function getcode(params) {
+    fetch(`http://localhost:5500/auth/${params}`).then((response) => {
       //var temdata = JSON.parse(response)
-     console.log(response.text());
-      
-    })
- }
-             
-            
-            
+      response.text().then((e) => {
+        return e
+       
+      })
+  })
+  }
 
+  function getdata() {
+    db.get().then((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setUser(items);
+      //console.log(user)
+    }).then(() => {
+      console.log(user)
+    });           
+    
+   }
+  
+    // [START listen_document] 
+function unsub() {
+   
+    getdata()
+    console.log(getcode(user.code));
+}
+   
+  
+  
+   
+          
+ 
  
   
   
@@ -36,8 +61,7 @@ function App() {
     
 
  useEffect(() => {
-   unsub();
-
+   unsub()
  },[])
     
  
@@ -55,7 +79,7 @@ function App() {
        return (<div >
        <Cards title = {p.product}
               user  = {p.user}
-              token = {p.code}
+              token = {getcode(p.code)}
               key = {p.id}/>
        </div>)
        }

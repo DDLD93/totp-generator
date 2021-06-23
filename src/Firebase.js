@@ -4,12 +4,12 @@ import "firebase/firestore"
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAjEmiBw-NJOVqMaUoXLy-qTOL6AIyOA2U",
-    authDomain: "totp-generator-58efe.firebaseapp.com",
-    projectId: "totp-generator-58efe",
-    storageBucket: "totp-generator-58efe.appspot.com",
-    messagingSenderId: "215684116631",
-    appId: "1:215684116631:web:82f87da09fd1ea94c7b9d2"
+  apiKey: "AIzaSyD-tedQTg4b0EIkw8WahJkCEf2MziZP3L0",
+  authDomain: "totp-generator-12baa.firebaseapp.com",
+  projectId: "totp-generator-12baa",
+  storageBucket: "totp-generator-12baa.appspot.com",
+  messagingSenderId: "337057138190",
+  appId: "1:337057138190:web:3a4e1c4d7eb410a57c5e5f"
   };
 
   export var app = firebase.initializeApp(firebaseConfig);
