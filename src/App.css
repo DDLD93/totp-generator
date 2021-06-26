@@ -3,7 +3,7 @@
   font-weight: 900;
 }
 .button {
-  position: absolute;
+  position: fixed;
   bottom: 50px;
   right: auto;
   left: 310px;

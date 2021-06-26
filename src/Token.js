@@ -1,17 +1,21 @@
 
+
+import jsSHA from "jssha";
 const JsSHA = require('jssha');
+//const jsSHA1 = require("jssha/sha1");
+
 
 
 export  function getToken(key, options) {
 	options = options || {};	
-	let epoch, time, shaObj, hmac, offset, otp;
+	var epoch, time, shaObj, hmac, offset, otp;
 	options.period = options.period || 30;
 	options.algorithm = options.algorithm || 'SHA-1';
 	options.digits = options.digits || 6;
 	key = base32tohex(key);
 	epoch = Math.round(Date.now() / 1000.0);
 	time = leftpad(dec2hex(Math.floor(epoch / options.period)), 16, '0');
-	shaObj = new JsSHA(options.algorithm, 'HEX');
+    shaObj = new JsSHA("SHA-512", options.algorithm, 'HEX');
 	shaObj.setHMACKey(key, 'HEX');
 	shaObj.update(time);
 	hmac = shaObj.getHMAC('HEX');

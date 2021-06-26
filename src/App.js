@@ -8,60 +8,35 @@ import Cards from "./Cards"
 import firebase from "./Firebase"
 import {app} from "./Firebase"
 import Popup from './Popup'
-import { useEffect, useState} from "react"
+import {getToken} from './Token'
+import { useEffect, useState, useMemo} from "react"
 
 function App() {
  
   const db = firebase.firestore(app).collection("auth");
   const [user, setUser] = useState([]);
   const [coder, setcoder] = useState([]);
+  const newUser = []
+  const items = [];
   
- 
-  
-  function getcode(params) {
-    fetch(`http://localhost:5500/auth/${params}`).then((response) => {
-      //var temdata = JSON.parse(response)
-      response.text().then((e) => {
-        return e
-       
-      })
-  })
-  }
 
   function getdata() {
     db.get().then((querySnapshot) => {
-      const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
-      });
-      setUser(items);
-      //console.log(user)
-    }).then(() => {
-      console.log(user)
-    });           
-    
-   }
-  
-    // [START listen_document] 
-function unsub() {
-   
-    getdata()
-    console.log(getcode(user.code));
-}
-   
-  
-  
-   
-          
+  })
+  setUser(items)
+      })         
+  }
  
- 
-  
-  
+   console.log(getToken('dssunjmvd'));
+
 
     
 
- useEffect(() => {
-   unsub()
+useEffect(() => {
+  getdata()
+  
  },[])
     
  
@@ -79,7 +54,7 @@ function unsub() {
        return (<div >
        <Cards title = {p.product}
               user  = {p.user}
-              token = {getcode(p.code)}
+              token = {p.code}
               key = {p.id}/>
        </div>)
        }
