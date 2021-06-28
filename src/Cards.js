@@ -6,8 +6,8 @@ function Cards(props) {
         <div>
             <Card  style={{ width: '18rem' }}>
             <Card.Body>
-                <Card.Title>{props.title}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{props.user}</Card.Subtitle>
+                <Card.Title className= "title">{props.title}</Card.Title>
+                <Card.Subtitle style={{fontFamily: 'italic'}} className="mb-2 text-muted">{props.user}</Card.Subtitle>
                 <Card.Text className="token">
                     {props.token}
                 </Card.Text>

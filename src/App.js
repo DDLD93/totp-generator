@@ -8,36 +8,51 @@ import Cards from "./Cards"
 import firebase from "./Firebase"
 import {app} from "./Firebase"
 import Popup from './Popup'
-import {getToken} from './Token'
-import { useEffect, useState, useMemo} from "react"
+import { useEffect, useState} from "react"
 
 function App() {
  
   const db = firebase.firestore(app).collection("auth");
   const [user, setUser] = useState([]);
-  const [coder, setcoder] = useState([]);
-  const newUser = []
-  const items = [];
+  const [coder, setcoder] = useState(0);
+ const items = [];
+ 
+ 
+
   
 
   function getdata() {
     db.get().then((querySnapshot) => {
+      setUser([])
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
-  })
-  setUser(items)
-      })         
+      });
+     
+      
+    }).then(() => {
+     items.forEach((e) => {
+        const object = e
+        fetch(`http://localhost:5500/auth/${e.key}`).then((res) => {
+          res.text().then((e) => {
+            object.code = e
+            setUser(prevuser => [...prevuser, object])
+    })
+        })
+      })
+    })     
   }
- 
-   console.log(getToken('dssunjmvd'));
 
-
+  function iterate() {
+    user.map((e) => console.log(e))
     
+  }
 
-useEffect(() => {
+  useEffect(() => {
   getdata()
-  
- },[])
+  setInterval(() => {
+    iterate()
+    }, 5000);
+}, [])
     
  
   

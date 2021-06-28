@@ -1,6 +1,6 @@
 .token {
   font-size: xx-large;
-  font-weight: 900;
+  font-weight: 500;
 }
 .button {
   position: fixed;
@@ -11,4 +11,8 @@
 }
 .umar {
   position: fixed;
+}
+.title {
+  font-size: xx-large;
+  font-weight: 1000;
 }
