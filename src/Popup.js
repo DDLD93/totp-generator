@@ -12,20 +12,27 @@ function Popup() {
   var [formdata, setdata] = useState([])
   const db = firebase.firestore(app).collection("auth");
   const handleClose = () => {
-    db.doc(formdata.product).set({
-      product: formdata.product,
-      user: formdata.user,
-      key: formdata.key
-  })
-  .then(() => {
-      console.log("Document successfully written!");
-  })
-  .catch((error) => {
-      console.error("Error writing document: ", error);
-  });
+    if (formdata.user !== "" && formdata.product !== "" && formdata.key !== "") {
+      
+      db.doc(formdata.product).set({
+        product: formdata.product,
+        user: formdata.user,
+        key: formdata.key
+    })
+    .then(() => {
+        console.log("Document successfully written!");
+    })
+    .catch((error) => {
+        console.error("Error writing document: ", error);
+    });
+    }else {
+      console.log("all fields are required");
+    }
     setShow(false)};
   const handleShow = () => setShow(true);
   const typing = (e) => {
+
+    
     if (e.target.placeholder === 'Product') {
       setdata(prevdata => ({...prevdata, product:e.target.value }))
       console.log(e.target.placeholder);
