@@ -1,27 +1,51 @@
-const express = require("express");
+var express = require('express');  
+var admin = require('firebase-admin');
+var app = express();  
+var server = require('http').createServer(app);  
 const totp = require("totp-generator");
 const PORT = 5500;
-const app = express();
-var data1 
-var data2 = []
- 
+var io = require('socket.io')(server);
+var serviceAccount = require("./totp-generator.json");
 
-app.get('/auth/:keys', (req, res) =>{
-  data2 = []
-  data1 = req.params.keys
-  data1 = data1.split(',')
-  
-  data1.map((e) => {
-   data2.push(totp(e))
-    data1 = data2
-  })
-  console.log(data1);
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.send(data1.join(' '))
-})
-  
-
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://totp-generator-12baa-default-rtdb.europe-west1.firebasedatabase.app"
 });
+const db = admin.firestore();
+var datas =[]
+const dataClient =[]
+
+async function getdata() {
+  const snapshot = await db.collection('auth').get()
+   snapshot.docs.forEach(doc => {
+    datas.push(doc.data())
+  });
+}
+
+getdata()
+function clientdata() {
+  
+  datas.forEach((e) => {
+  let tempObject = e
+  e.code = totp(e.key)
+  dataClient.push(tempObject)
+  })
+  
+}
+
+io.on('connection', function(client) {
+  console.log('Client connected...');
+  io.emit('data', dataClient);
+  
+});
+
+
+
+
+
+
+
+server.listen(PORT);
+
+  
+
