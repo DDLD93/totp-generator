@@ -38,14 +38,17 @@ function clientdata() {
 }
 
 io.on("connection", (socket) => {
+  console.log('render');
   getdata()
   
   socket.emit("hello", "world");
+  socket.on("rerender",(e) => {
+    console.log('render');
+    clientdata()
+  })
 });
 
-setInterval(() => {
-  clientdata()
-}, 30000);
+
 
 
 
