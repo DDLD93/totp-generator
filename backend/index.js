@@ -4,9 +4,12 @@ var app = express();
 var server = require('http').createServer(app);  
 const totp = require("totp-generator");
 const PORT = 5500;
-var io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+  }
+});
 var serviceAccount = require("./totp-generator.json");
-
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://totp-generator-12baa-default-rtdb.europe-west1.firebasedatabase.app"
