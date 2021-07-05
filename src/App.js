@@ -7,7 +7,7 @@ import socketIOClient from "socket.io-client";
 import Navigation from './Navigation';
 import Cards from "./Cards"
 import Popup from './Popup'
-import { useEffect, useState} from "react"
+import {useEffect, useState} from "react"
 
 
 function App() {
@@ -52,8 +52,7 @@ function App() {
        </div>)
        }
        )}
-     
-   </Col>
+    </Col>
   </Row>
   <Popup />
 </Container>
