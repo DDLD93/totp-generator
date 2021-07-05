@@ -16,31 +16,36 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 var datas =[]
-var dataClient =[]
+
 
 async function getdata() {
+  datas = []
   const snapshot = await db.collection('auth').get()
-   snapshot.docs.forEach(doc => {
-    datas.push(doc.data())
+   snapshot.docs.map(doc => {
+    return datas.push(doc.data())
   })
   clientdata()
+  //console.log(datas);
 }
 
-getdata()
 function clientdata() {
-  dataClient = []
-  datas.forEach((e) => {
+  datas.map((e) => {
   let tempObject = e
   e.code = totp(e.key)
-  dataClient.push(tempObject)
-})
+ return tempObject
+  })
+  return io.emit('data', datas);
+}
+
+io.on("connection", (socket) => {
+  getdata()
   
-io.on('connection', function(client) {
-  console.log('Client connected...');
-  io.emit('data', dataClient);
+  socket.emit("hello", "world");
 });
 
-}
+setInterval(() => {
+  clientdata()
+}, 30000);
 
 
 

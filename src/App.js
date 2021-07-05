@@ -10,6 +10,7 @@ import firebase from "./Firebase"
 import {app} from "./Firebase"
 import Popup from './Popup'
 import { useEffect, useState} from "react"
+import { Socket } from 'socket.io';
 
 function App() {
  
@@ -19,16 +20,25 @@ function App() {
  const items = [];
 
  
-    
+  
  useEffect(() => {
+  //  setInterval(() => {
+  //   socket.emit('render');
+  //   console.log('render');
+  //   setcoder(!coder)
+  //  },10000)
   const socket = socketIOClient('http://localhost:5500');
-  socket.on("connect", data => {
-    socket.on('data', (e) => {
-      setUser(e)
-      console.log(e)
-    })
+  socket.on("hello", (arg) => {
+    
+    console.log(arg); // world
   });
- },[])
+  socket.on('data', (e) => {
+    setUser(e)
+    console.log(e)
+  })
+ }
+
+ ,[])
   
   
   
