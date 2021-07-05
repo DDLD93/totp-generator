@@ -6,18 +6,13 @@ import Col from 'react-bootstrap/Col'
 import socketIOClient from "socket.io-client";
 import Navigation from './Navigation';
 import Cards from "./Cards"
-import firebase from "./Firebase"
-import {app} from "./Firebase"
 import Popup from './Popup'
 import { useEffect, useState} from "react"
-import { Socket } from 'socket.io';
+
 
 function App() {
- 
-  const db = firebase.firestore(app).collection("auth");
-  const [user, setUser] = useState([]);
-  const [coder, setcoder] = useState(true);
- const items = [];
+ const [user, setUser] = useState([]);
+  
 
 
  
@@ -25,16 +20,16 @@ function App() {
  useEffect(() => {
   const socket = socketIOClient('http://localhost:5500');
   socket.on("hello", (arg) => {
-    console.log(arg); // world
+    //console.log(arg); // world
   });
   socket.on('data', (e) => {
     setUser(e)
-    console.log(e)
+    //console.log(e)
   })
 
   setInterval(() => {
     socket.emit('rerender')
-    console.log('rerender client side');
+    //console.log('rerender client side');
     
   }, 30000);
  },[])
