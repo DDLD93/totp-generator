@@ -13,31 +13,33 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 var datas =[]
-const dataClient =[]
+var dataClient =[]
 
 async function getdata() {
   const snapshot = await db.collection('auth').get()
    snapshot.docs.forEach(doc => {
     datas.push(doc.data())
-  });
+  })
+  clientdata()
 }
 
 getdata()
 function clientdata() {
-  
+  dataClient = []
   datas.forEach((e) => {
   let tempObject = e
   e.code = totp(e.key)
   dataClient.push(tempObject)
-  })
+})
   
-}
-
 io.on('connection', function(client) {
   console.log('Client connected...');
   io.emit('data', dataClient);
-  
 });
+
+}
+
+
 
 
 

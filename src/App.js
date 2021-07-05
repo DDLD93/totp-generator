@@ -15,15 +15,18 @@ function App() {
  
   const db = firebase.firestore(app).collection("auth");
   const [user, setUser] = useState([]);
-  const [coder, setcoder] = useState(0);
+  const [coder, setcoder] = useState(true);
  const items = [];
 
-
+ 
     
  useEffect(() => {
   const socket = socketIOClient('http://localhost:5500');
   socket.on("connect", data => {
-    socket.on('data', (e) => console.log(e))
+    socket.on('data', (e) => {
+      setUser(e)
+      console.log(e)
+    })
   });
  },[])
   
