@@ -9,12 +9,12 @@ import {useState} from "react"
 function Popup() {
 
   const [show, setShow] = useState(false);
-  var [formdata, setdata] = useState([])
+  var [formdata, setdata] = useState(" ")
   const db = firebase.firestore(app).collection("auth");
   const handleClose = () => {
-    if (formdata.user !== "" && formdata.product !== "" && formdata.key !== "") {
-      
-      db.doc(formdata.product).set({
+    if (formdata.user !== undefined  && formdata.product !== undefined && formdata.key !== undefined) {
+      console.log(formdata.user);
+      db.doc().set({
         product: formdata.product,
         user: formdata.user,
         key: formdata.key
@@ -26,14 +26,13 @@ function Popup() {
         console.error("Error writing document: ", error);
     });
     }else {
-      console.log("all fields are required");
+      alert("all fields are required");
     }
-    setShow(false)};
+    setShow(false)
+  };
   const handleShow = () => setShow(true);
-  const typing = (e) => {
-
-    
-    if (e.target.placeholder === 'Product') {
+ function typing(e) {
+   if (e.target.placeholder === 'Product') {
       setdata(prevdata => ({...prevdata, product:e.target.value }))
       console.log(e.target.placeholder);
     }
@@ -46,7 +45,6 @@ function Popup() {
       console.log(e.target.placeholder);
     }
     console.log(formdata);
-
   }
     return (
         <>
