@@ -37,12 +37,12 @@ export default function Home() {
         <Row>
           <Col>
           
-           {user.map(p => {
+           {user.map((p, k) => {
              return (<div >
              <Cards title = {p.product}
                     user  = {p.user}
                     token = {p.code}
-                    key = {p.id}/>
+                    key = {k}/>
              </div>)
              }
              )}

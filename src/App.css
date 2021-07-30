@@ -16,3 +16,55 @@
   font-size: xx-large;
   font-weight: 1000;
 }
+#card {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 20rem;;
+  border: 1px solid #b1b1b1;
+  border-width: 2px;
+  box-shadow: 1px 1px 1px 0 lightgray inset;  
+  text-align: center;
+  align-items: center;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+#textarea {
+  -moz-appearance: textfield-multiline;
+  -webkit-appearance: textarea;
+  font: medium -moz-fixed;
+  font: -webkit-small-control;
+  text-align: center;
+  height: 50px;
+  overflow: auto;
+  padding: 15px;
+  border-style: none;
+  width: -webkit-fill-available;
+}
+
+#input {
+  -moz-appearance: textfield;
+  text-align: center;
+  -webkit-appearance: textfield;
+  background-color: white;
+  background-color: -moz-field;
+  font-weight: bolder;
+  font: -moz-field;
+  font-family: monospace;
+  font:bolder;
+  font-size: 20px;
+  border-bottom: 1px solid black;
+  padding: 2px 3px;
+  margin-bottom: 0;
+  width: -webkit-fill-available; 
+  height: 30px;   
+}
+
+#textarea[contenteditable="true"] {
+  width:-webkit-fill-available;
+  height:150px;
+  background: rgb(214, 214, 214);
+  text-align: start;
+  padding: 1px 2px;
+}
