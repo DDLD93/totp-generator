@@ -8,19 +8,22 @@ import {BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useState } from 'react';
-//import { getAuth, signInWithPhoneNumber } from "firebase/auth";
+
 
 
 function App() {
- const [admin, setuser] = useState(null)
+  const [render, setrender] = useState(null)
+ var admin = false; 
  function submit() {
   let email = document.querySelector('#email').value 
   let password = document.querySelector('#password').value 
   firebase.auth().signInWithEmailAndPassword(email, password)
 .then((userCredential) => {
  // Signed in
- setuser(userCredential.user)
- // ...
+ admin =userCredential.user
+ setrender(userCredential.user)
+ console.log(admin)
+ 
 })
 .catch((error) => {
    console.log(error);
@@ -30,7 +33,7 @@ function App() {
   
   return (
 <div>
-      {admin ?
+      {render ?
        <div>
         <Navigation className='umar'/>
         <Router>

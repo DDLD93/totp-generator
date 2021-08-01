@@ -25,7 +25,6 @@ async function getdata() {
     return datas.push(doc.data())
   })
   clientdata()
-  //console.log(datas);
 }
 
 function clientdata() {
@@ -34,19 +33,9 @@ function clientdata() {
   e.code = totp(e.key)
  return tempObject
   })
-  return io.emit('data', datas);
 }
 
-io.on("connection", (socket) => {
-  console.log('render');
-  getdata()
-  
-  socket.emit("hello", "world");
-  socket.on("rerender",(e) => {
-    console.log('render');
-    clientdata()
-  })
-});
+
 
 
 

@@ -11,14 +11,10 @@ export default function Notes (props) {
 
  
   
-  async function getMarker() {
-    const snapshot = await firebase.firestore().collection('notes').get()
-    return snapshot.docs.map(doc => setnote(...note, doc.data()));
-  }
-  
+ 
     
    useEffect(() => {
-     getMarker()
+   
     
 
      

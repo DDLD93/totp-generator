@@ -2,33 +2,40 @@ import './App.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import socketIOClient from "socket.io-client";
+import firebase from './Firebase'
 import Cards from "./Cards"
 import Popup from './Popup'
 import {useEffect, useState} from "react"
 
 export default function Home() {
-    const [user, setUser] = useState([]);
   
-
-
- 
+const [user, setuser] = useState([]);
+const data = []
   
-    useEffect(() => {
-     const socket = socketIOClient('http://localhost:5500');
-     socket.on("hello", (arg) => {
-       //console.log(arg); // world
-     });
-     socket.on('data', (e) => {
-       setUser(e)
-       //console.log(e)
-     })
+    async function getMarker() {
+      
+      const snapshot = await firebase.firestore().collection('auth').get();
+      snapshot.docs.forEach(doc => data.push(doc.data()));
+      fetchdata(data)
+      return setuser(data)
+    }
    
-     setInterval(() => {
-       socket.emit('rerender')
-       //console.log('rerender client side');
-       
-     }, 30000);
+function fetchdata(params) {
+  const node = JSON.stringify(params)
+  fetch(`http://3.68.169.52:4200/${node}`).then((res) =>{
+   res.json().then(e => {
+     console.log(e)
+     setuser(e)
+   })
+  })
+}
+  useEffect(() => {
+      getMarker()
+      setInterval(() => {
+        fetchdata(data)
+      }, 30000);
+    
+
     },[])
 
     return (
