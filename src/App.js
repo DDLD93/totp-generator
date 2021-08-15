@@ -33,7 +33,7 @@ function App() {
   
   return (
 <div>
-      {render ?
+      {!render ?
        <div>
         <Navigation className='umar'/>
         <Router>

@@ -2,29 +2,19 @@ import React from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import firebase from "./Firebase"
-import {app} from "./Firebase"
 import Button from 'react-bootstrap/Button'
 import {useState} from "react"
+
 
 function Popup() {
 
   const [show, setShow] = useState(false);
   var [formdata, setdata] = useState(" ")
-  const db = firebase.firestore(app).collection("auth");
   const handleClose = () => {
     if (formdata.user !== undefined  && formdata.product !== undefined && formdata.key !== undefined) {
-      console.log(formdata.user);
-      db.doc().set({
-        product: formdata.product,
-        user: formdata.user,
-        key: formdata.key
-    })
-    .then(() => {
-        console.log("Document successfully written!");
-    })
-    .catch((error) => {
-        console.error("Error writing document: ", error);
-    });
+      
+      const addKey = firebase.functions().httpsCallable('addKey');
+      addKey(formdata).then(e => console.log('keysadded'))
     }else {
       alert("all fields are required");
     }
