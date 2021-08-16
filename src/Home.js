@@ -9,30 +9,26 @@ import {useEffect, useState} from "react"
 
 export default function Home() {
   
-const [user, setuser] = useState([]);
-const data = []
   
-    async function getMarker() {
+const [user, setuser] = useState([]);
+
+  function getData() {
+    firebase.auth().signInWithEmailAndPassword('umar.jere@gmail.com', '16001105')
+    .then(user => {
+      console.log('logged in', user);
+     
+    })
+    .catch(error => {
       
-      const snapshot = await firebase.firestore().collection('auth').get();
-      snapshot.docs.forEach(doc => data.push(doc.data()));
-      fetchdata(data)
-      return setuser(data)
-    }
-   
-function fetchdata(params) {
-  const node = JSON.stringify(params)
-  fetch(`http://3.68.169.52:4200/${node}`).then((res) =>{
-   res.json().then(e => {
-     console.log(e)
-     setuser(e)
-   })
-  })
-}
+    });
+    const tokenRequest = firebase.functions().httpsCallable('tokenRequest');
+    tokenRequest().then(e => console.log(e))
+  }
+    
   useEffect(() => {
-      getMarker()
+      getData()
       setInterval(() => {
-        fetchdata(data)
+        getData()
       }, 30000);
     
 

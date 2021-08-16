@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
-import firebase from "./Firebase"
+import firebase from 'firebase'
 import Button from 'react-bootstrap/Button'
 import {useState} from "react"
 
