@@ -5,8 +5,7 @@ import {useEffect, useState} from "react"
 import { render } from '@testing-library/react'
 
 
-export default function Notes (props) {
-  const db = firebase.firestore(app).collection("notes");
+export default function Settings (props) {
   const [note, setnote] = useState([])
 
  

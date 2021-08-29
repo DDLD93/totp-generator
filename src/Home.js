@@ -1,28 +1,48 @@
 import './App.css';
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import firebase from './Firebase'
 import Cards from "./Cards"
 import Popup from './Popup'
-import {useEffect, useState} from "react"
+import {useEffect, useState} from "react";
+import Alert from 'react-bootstrap/Alert'
 
-export default function Home() {
+export default function Home({tokens}) {
   
   
-const [user, setuser] = useState([]);
-
+const [user, setuser] = useState([
+  {product:'google',
+    user:'umar.jere',
+    token: 98765678 },
+    {product:'google',
+    user:'umar.jere',
+    token: 1111111 },
+    {product:'google',
+    user:'umar.jere',
+    token: 2222222 },
+    {product:'google',
+    user:'umar.jere',
+    token: 98765678 },
+    {product:'google',
+    user:'umar.jere',
+    token: 98765678 },
+    {product:'google',
+    user:'umar.jere',
+    token: 98765678 },
+    {product:'google',
+    user:'umar.jere',
+    token: 98765678 },
+  ]);
   function getData() {
     firebase.auth().signInWithEmailAndPassword('umar.jere@gmail.com', '16001105')
     .then(user => {
-      console.log('logged in', user);
+      // console.log('logged in', user);
      
     })
     .catch(error => {
       
     });
-    const tokenRequest = firebase.functions().httpsCallable('tokenRequest');
-    tokenRequest().then(e => console.log(e))
+    const getdata = firebase.functions().httpsCallable('getdata');
+    //getdata().then(e => setuser(e.data))
   }
     
   useEffect(() => {
@@ -35,25 +55,24 @@ const [user, setuser] = useState([]);
     },[])
 
     return (
-        <div>
-        <Container style={{position: 'relative', zIndex: '1', paddingTop:'90px'}} fluid>
-        <Row>
-          <Col>
+          
+        <Container style={{position: 'relative', zIndex: '1', paddingTop:'90px'}} >
+        <Alert className='alert' style={{position:'fixed', zIndex:'1'}} variant='success'>copied 45678</Alert>
+        
           
            {user.map((p, k) => {
-             return (<div >
-             <Cards title = {p.product}
+             return (<Cards key={p.key}
+                    title = {p.product}
                     user  = {p.user}
-                    token = {p.code}
-                    key = {k}/>
-             </div>)
+                    token = {p.token}
+                    />
+            )
              }
              )}
-          </Col>
-        </Row>
+        
         <Popup />
       </Container>
-       </div>
+      
     )
     
 }

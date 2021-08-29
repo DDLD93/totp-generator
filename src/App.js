@@ -1,10 +1,10 @@
 import Home from './Home'
-import Notes from './Notes'
+import Settings from './Settings'
 import About from './About'
 import Login from './Login'
 import './App.css';
 import Navigation from './Navigation';
-import {BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
+import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useState } from 'react';
@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 
 function App() {
-  const [render, setrender] = useState(null)
+  const [render, setrender] = useState(true)
  var admin = false; 
  function submit() {
   let email = document.querySelector('#email').value 
@@ -20,7 +20,7 @@ function App() {
   firebase.auth().signInWithEmailAndPassword(email, password)
 .then((userCredential) => {
  // Signed in
- admin =userCredential.user
+ admin =userCredential
  setrender(userCredential.user)
  console.log(admin)
  
@@ -33,7 +33,7 @@ function App() {
   
   return (
 <div>
-      {!render ?
+      {render ?
        <div>
         <Navigation className='umar'/>
         <Router>
@@ -41,8 +41,8 @@ function App() {
                <Route path="/about">
                  <About />
                </Route>
-               <Route path="/notes">
-                 <Notes />
+               <Route path="/Settings">
+                 <Settings />
                </Route>
                <Route exact path="/">
                  <Home />

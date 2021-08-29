@@ -1,25 +1,47 @@
-import React, { useRef } from 'react'
-import Card from 'react-bootstrap/Card'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from 'react-bootstrap/Card';
 
+
+const useStyles = makeStyles({
+    root: {
+      minWidth: 275,
+      border: '1px solid rgba(0,0,0,0.5)',
+      gap:'1px'
+    },
+    body: {
+        padding:'1px'
+    },
+    title: {
+        fontSize: '40px',
+        fontWeight: '400px'
+    },
+    subtitle: {
+        fontSize: '20px'
+    }
+  });
 function Cards(props) {
-  const token = useRef(null)
-    function copy() {
-    let tokens = token.current.innerText
-        navigator.clipboard.writeText(tokens)
-            alert("Copied the text: " + tokens);
-      }
+    const classes = useStyles();
+   
     return (
-        <div>
-            <Card onClick={copy} style={{ width: '18rem', marginTop: '3px' }}>
+        
+            <Card className={classes.root} variant="outlined"
+            onClick={(e) => {
+                
+                if (e.target.classList.contains('token')) {
+                  let alert =  document.querySelector(".alert");
+                      alert.style.display = 'block'
+                    setTimeout(()=>alert.style.display = 'none',2000)
+                }
+                }} style={{ width: '18rem', marginTop: '3px' }}>
             <Card.Body>
-                <Card.Title className= "title">{props.title}</Card.Title>
-                <Card.Subtitle style={{fontFamily: 'italic'}} className="mb-2 text-muted">{props.user}</Card.Subtitle>
-                <Card.Text ref={token} className="token">
-                    {props.token}
-                </Card.Text>
+                <Card.Title className={classes.title}>{props.title}</Card.Title>
+                <Card.Subtitle className={classes.subtitle}>{props.user}</Card.Subtitle>
+                
+                <Card.Text class='token' className={classes.token}>{props.token}</Card.Text>
             </Card.Body>
             </Card>
-        </div>
+        
     )
 }
 

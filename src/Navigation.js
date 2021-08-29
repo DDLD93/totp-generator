@@ -1,12 +1,19 @@
-import React from 'react'
-import Navbar from 'react-bootstrap/Navbar'
+import React from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import { makeStyles } from '@material-ui/core/styles';
 import Nav from 'react-bootstrap/Nav'
-
+const useStyles = makeStyles({
+  root: {
+    position: 'fixed',
+    zIndex: '5',
+    width: '100%'
+  }
+});
 
 function Navigation() {
+  const classes = useStyles();
     return (
-        <div style={{ marginBottom: '15px', position: 'fixed', zIndex: '2', width:'100vw'}}>
-<Navbar bg="primary" variant='dark' expand="sm">
+<Navbar className={classes.root} bg="primary" variant='dark' expand="sm">
   <Navbar.Brand href="#">Authenticator</Navbar.Brand>
   <Navbar.Toggle  />
   <Navbar.Collapse id="navbarScroll">
@@ -20,7 +27,7 @@ function Navigation() {
     
   </Navbar.Collapse>
 </Navbar>
-        </div>
+      
     )
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import firebase from 'firebase'
+import AddCircleSharpIcon from '@material-ui/icons/AddCircleSharp';
 import Button from 'react-bootstrap/Button'
 import {useState} from "react"
 
@@ -13,8 +14,11 @@ function Popup() {
   const handleClose = () => {
     if (formdata.user !== undefined  && formdata.product !== undefined && formdata.key !== undefined) {
       
-      const addKey = firebase.functions().httpsCallable('addKey');
-      addKey(formdata).then(e => console.log('keysadded'))
+      const addProduct = firebase.functions().httpsCallable('addProduct');
+      console.log(formdata)
+      addProduct(formdata).then(e => {
+        firebase.functions().httpsCallable('getdata')
+      })
     }else {
       alert("all fields are required");
     }
@@ -38,9 +42,8 @@ function Popup() {
   }
     return (
         <>
-      <Button className="button" variant="primary" onClick={handleShow}>
-        Add
-      </Button>
+        <AddCircleSharpIcon id="button" variant="primary" onClick={handleShow}></AddCircleSharpIcon>
+      
 
       <Modal
         show={show}
