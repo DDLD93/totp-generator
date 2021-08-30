@@ -16,16 +16,16 @@ function Navigation() {
 <Navbar className={classes.root} bg="primary" variant='dark' expand="sm">
   <Navbar.Brand href="#">Authenticator</Navbar.Brand>
   <Navbar.Toggle  />
-  <Navbar.Collapse id="navbarScroll">
+   <Navbar.Collapse id="navbarScroll">
     <Nav
       className="mr-auto my-2 my-lg-0"
       style={{ maxHeight: '100px' }}>
       <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="/notes">Notes Keep</Nav.Link>
+      <Nav.Link href="/notes">Settings</Nav.Link>
       <Nav.Link href="/about">About</Nav.Link>
     </Nav>
+    </Navbar.Collapse>
     
-  </Navbar.Collapse>
 </Navbar>
       
     )

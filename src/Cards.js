@@ -5,19 +5,23 @@ import Card from 'react-bootstrap/Card';
 
 const useStyles = makeStyles({
     root: {
-      minWidth: 275,
+      width: '28rem',
       border: '1px solid rgba(0,0,0,0.5)',
-      gap:'1px'
+      boxShadow: '1px 1px 1px 1px #888888;'
     },
     body: {
-        padding:'1px'
+        padding:'0.7rem'
     },
     title: {
-        fontSize: '40px',
-        fontWeight: '400px'
+        fontSize: '25px',
+        fontWeight: '800px',
+        letterSpacing: '3px'
     },
     subtitle: {
-        fontSize: '20px'
+        fontSize: '15px'
+    },
+    token: {
+        letterSpacing: '7px'
     }
   });
 function Cards(props) {
@@ -33,8 +37,8 @@ function Cards(props) {
                       alert.style.display = 'block'
                     setTimeout(()=>alert.style.display = 'none',2000)
                 }
-                }} style={{ width: '18rem', marginTop: '3px' }}>
-            <Card.Body>
+                }}>
+            <Card.Body className={classes.body}>
                 <Card.Title className={classes.title}>{props.title}</Card.Title>
                 <Card.Subtitle className={classes.subtitle}>{props.user}</Card.Subtitle>
                 

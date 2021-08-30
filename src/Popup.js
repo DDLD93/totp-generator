@@ -18,6 +18,7 @@ function Popup() {
       console.log(formdata)
       addProduct(formdata).then(e => {
         firebase.functions().httpsCallable('getdata')
+        console.log('data added')
       })
     }else {
       alert("all fields are required");

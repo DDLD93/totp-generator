@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 
 function App() {
-  const [render, setrender] = useState(true)
+  const [render, setrender] = useState(false)
  var admin = false; 
  function submit() {
   let email = document.querySelector('#email').value 
@@ -29,7 +29,24 @@ function App() {
    console.log(error);
 }); 
  }
- 
+ function signUP() {
+  var email = "ujere@gmail.com";
+  var password = "11051600";
+  // [START auth_signup_password]
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in 
+      var user = userCredential.user;
+      console.log('yayi')
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ..
+    });
+  }
+
   
   return (
 <div>

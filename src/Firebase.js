@@ -8,6 +8,7 @@ import "firebase/auth"
 const firebaseConfig = {
   apiKey: "AIzaSyBHUfko63cc9WPw6a11rhAf5Dt1gYkFto0",
   authDomain: "ddld93.firebaseapp.com",
+  databaseURL: "https://ddld93-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "ddld93",
   storageBucket: "ddld93.appspot.com",
   messagingSenderId: "772087817009",

@@ -80,8 +80,7 @@ exports.app = functions.https.onRequest(app)
 //create user profile and schema on firestore upon user creation --auth
 exports.newUserSignUp = functions.auth.user().onCreate(user => {
   return userKeys.doc(user.uid).set({
-    firstName: user.name || null,
-    lastName: user || null ,
+    Name: user.name || null,
     userid : user.uid,
     email: user.email,
     products: []
