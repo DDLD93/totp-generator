@@ -13,14 +13,14 @@ function Login(props) {
     
 
     return (
-     <div class="full-screen-container">
-        <div class="login-container">
-          <h3 class="login-title">Welcome</h3>
-          <div class="input-group">
+     <div className="full-screen-container">
+        <div className="login-container">
+          <h3 cclassName="login-title">Welcome</h3>
+          <div className="input-group">
               <label>Email</label>
               <input id='email' type="email" />
             </div>
-            <div class="input-group">
+            <div className="input-group">
               <label>Password</label>
               <input id='password' type="password" />
             </div>

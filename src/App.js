@@ -1,3 +1,5 @@
+import React, { useContext } from 'react';
+import {AuthContext} from './Auth'
 import Home from './Home'
 import Settings from './Settings'
 import About from './About'
@@ -7,27 +9,20 @@ import Navigation from './Navigation';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { useState } from 'react';
+
+
 
 
 
 function App() {
-  const [render, setrender] = useState(false)
- var admin = false; 
- function submit() {
+  const { user, login, logout, authReady} = useContext(AuthContext)
+ 
+ 
+  function submit() {
   let email = document.querySelector('#email').value 
   let password = document.querySelector('#password').value 
-  firebase.auth().signInWithEmailAndPassword(email, password)
-.then((userCredential) => {
- // Signed in
- admin =userCredential
- setrender(userCredential.user)
- console.log(admin)
- 
-})
-.catch((error) => {
-   console.log(error);
-}); 
+  login(email, password)
+  console.log('clicked at login')
  }
  function signUP() {
   var email = "ujere@gmail.com";
@@ -49,8 +44,9 @@ function App() {
 
   
   return (
-<div>
-      {render ?
+
+  <div>
+      {authReady ?
        <div>
         <Navigation className='umar'/>
         <Router>
@@ -69,7 +65,7 @@ function App() {
      </div>
      : <Login submit={submit}/>
       }
-</div>
+      </div>
   
 
   )

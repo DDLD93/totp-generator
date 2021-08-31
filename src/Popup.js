@@ -43,7 +43,7 @@ function Popup() {
   }
     return (
         <>
-        <AddCircleSharpIcon id="button" variant="primary" onClick={handleShow}></AddCircleSharpIcon>
+        <AddCircleSharpIcon style={{color:'#007bff', marginRight:'200px'}} id="button" variant="primary" onClick={handleShow}></AddCircleSharpIcon>
       
 
       <Modal

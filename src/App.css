@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;700&display=swap');
 .token {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: xx-large;
   font-weight: 900;
   letter-spacing: 8px;
-  color: rgb(0, 126, 168);
+  color: #007bff;
   font-family: 'Signika Negative', sans-serif;
 }
 #button {
@@ -13,7 +16,7 @@
   border-radius: 50%;
   bottom: 50px;
   right: auto;
-  left: 310px;
+  left: 260px;
   top: auto;
 }
 .umar {

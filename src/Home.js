@@ -1,10 +1,12 @@
+import React, { useContext } from 'react';
+import {AuthContext} from "./Auth";
 import './App.css';
 import Container from 'react-bootstrap/Container'
-import firebase from './Firebase'
 import { makeStyles } from '@material-ui/core/styles';
 import Cards from "./Cards"
 import Popup from './Popup'
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+
 import Alert from 'react-bootstrap/Alert';
 
 const useStyles = makeStyles({
@@ -17,28 +19,12 @@ const useStyles = makeStyles({
 
 export default function Home({tokens}) {
   const classes = useStyles();
-  
-  
-
-const [user, setuser] = useState([]);
-  // function getData() {
-  //   firebase.auth().signInWithEmailAndPassword('umar.jere@gmail.com', '16001105')
-  //   .then(user => {
-  //     // console.log('logged in', user);
-     
-  //   })
-  //   .catch(error => {
-      
-  //   });
-    const getdata = firebase.functions().httpsCallable('getdata');
-    getdata().then(e => setuser(e.data))
-  
-    
+  const { user, login, logout, authReady } = useContext(AuthContext)
   useEffect(() => {
-      getdata()
-      // setInterval(() => {
-      //   getData()
-      // }, 30000);
+
+ 
+   
+      
     
 
     },[])
