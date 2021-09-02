@@ -32,7 +32,7 @@ export default function Progress() {
 
   return (
     <div className={classes.root}>
-     <CircularProgress style={{color}} size ='30px' thickness={21} variant="determinate"  value={progress} />
+     <CircularProgress style={{color}} size ='27px' thickness={21} variant="determinate"  value={progress} />
     </div>
   ); 
 }

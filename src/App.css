@@ -101,13 +101,7 @@ body {
   justify-content: center;
 }
 
-.login-container {
-  background-color: hsla(201, 100%, 6%, 0.6);
-  padding: 50px 30px;
-  min-width: 400px;
-  width: 50%;
-  max-width: 600px;
-}
+
 
 .login-title {
   color: #fff;
@@ -170,4 +164,23 @@ body {
 .alert {
   margin-left: 50%;
   display: none;
+}
+.loginContainer {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.login-container {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  background-color: whitesmoke;
+  padding: 50px;
+  max-width: 450px;
+  min-width: 380px;
+  width: 70%;
+  
 }

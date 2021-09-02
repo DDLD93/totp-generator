@@ -7,47 +7,45 @@ import Login from './Login'
 import './App.css';
 import Navigation from './Navigation';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
-import firebase from "firebase/app";
-import "firebase/auth";
+import Loading from './Loading';
 
 
 
 
 
 function App() {
-  const { user, login, logout, authReady} = useContext(AuthContext)
+  
+  const {  login,isLoading, loginCreateSwitch,createUser, authReady} = useContext(AuthContext)
  
  
   function submit() {
   let email = document.querySelector('#email').value 
   let password = document.querySelector('#password').value 
+  loginCreateSwitch()
   login(email, password)
   console.log('clicked at login')
  }
- function signUP() {
-  var email = "ujere@gmail.com";
-  var password = "11051600";
-  // [START auth_signup_password]
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Signed in 
-      var user = userCredential.user;
-      console.log('yayi')
-      // ...
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ..
-    });
-  }
+
+ function signup() {
+  let email = document.querySelector('#email').value 
+  let password = document.querySelector('#password').value 
+  loginCreateSwitch()
+  createUser(email, password)
+  console.log('clicked at signup')
+ }
+ 
 
   
   return (
 
   <div>
-      {authReady ?
+      
+      {authReady !==null &&
        <div>
+         {authReady === false && <Login signin={submit}
+                            signup={signup} 
+                            />}
+         {authReady && <div>
         <Navigation className='umar'/>
         <Router>
              <Switch>
@@ -62,9 +60,11 @@ function App() {
                </Route>
              </Switch>
         </Router>
+      </div>}
      </div>
-     : <Login submit={submit}/>
       }
+      
+      {authReady === null && <div><Loading/></div>}                      
       </div>
   
 
