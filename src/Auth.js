@@ -6,16 +6,18 @@ export const AuthContext = createContext()
 
 export default function AuthContextProvider ({ children }) {
   const [user, setUser] = useState([])
-  const [authReady, setAuthReady] = useState(null)
-  const [isLoading, setisLoading] = useState(null)
-  const [loginCreate, setloginCreate] = useState(false)
+
+  // state to hold authentication status
+const [authReady, setAuthReady] = useState(false)
+const [isLoading, setisLoading] = useState(null)
+const [loginCreate, setloginCreate] = useState(false)
 
 
 
   useEffect(() => {
-
-    firebase.auth().onAuthStateChanged((user) => {
+  firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log(user)
         setAuthReady(true)
         firebaseCall()
         
@@ -44,15 +46,18 @@ export default function AuthContextProvider ({ children }) {
       user ? setAuthReady(true) : setAuthReady(false)
       console.log('logged in', user);
       firebaseCall()
-    }).catch((err) => console.log(err))
+    }).catch((err) => {
+      console.log(err)
+      setloginCreate(false)
+    })
   }
 
   
   function firebaseCall() {
         console.log('getting data from firestore')
-        getdata().then(e => {
-        console.log(e.data)
-        setUser(e.data)})
+      getdata().then(e => {
+        setUser(e.data)
+      }).catch((err) => console.log(err))
         //setisLoading(false)
   }
   const createUser = (email, password)=> {
@@ -80,11 +85,11 @@ export default function AuthContextProvider ({ children }) {
     })
   }
 
- const context = {user,loginCreate, createUser, login, logout, loginCreateSwitch, authReady , isLoading}
+ const context = {user,loginCreate, firebaseCall,createUser, login, logout, loginCreateSwitch, authReady , isLoading}
 
   return (
     <AuthContext.Provider value={context}>
-      { children }
+      {children}
     </AuthContext.Provider>
   )
 }

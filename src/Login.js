@@ -22,7 +22,7 @@ export default function Login(props) {
           {login && ( <div className="login-container">
             <TextField required fullWidth type='email' id="email" label="Email" />
             <TextField required fullWidth type='password' id="password" label="Password" />
-            <TextField required fullWidth type='password' id="password" label="Password-Confirm" />
+            <TextField required fullWidth type='password' id="passwordConfirmation" label="Password-Confirm" />
             <Button onClick={props.signup} disabled ={loginCreate} fullWidth variant="contained" color="primary">Sign Up</Button>
             <p>Already registered  <a onClick={loginswitch} href="#">Login</a> instead </p>
           </div>)}

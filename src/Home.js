@@ -7,7 +7,7 @@ import Cards from "./Cards"
 import Popup from './Popup'
 import {useEffect} from "react";
 
-import Alert from 'react-bootstrap/Alert';
+
 
 const useStyles = makeStyles({
   root :{
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
 export default function Home({tokens}) {
   const classes = useStyles();
-  const { user, login, logout, authReady } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   useEffect(() => {
 
  
@@ -32,17 +32,13 @@ export default function Home({tokens}) {
     return (
           
         <Container className={classes.root} style={{position: 'relative', zIndex: '1', paddingTop:'90px'}} >
-        <Alert className='alert' style={{position:'fixed', zIndex:'1'}} variant='success'>copied 45678</Alert>
-        
-          
-           {user.map((p, k) => {
+           {user.map(p => {
              return (<Cards key={p.key}
                     title = {p.product}
                     user  = {p.user}
                     token = {p.token}
-                    />
-            )
-             }
+                    />)
+}
              )}
         
         <Popup />

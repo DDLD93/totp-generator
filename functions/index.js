@@ -120,3 +120,19 @@ data.data().products.forEach((doc) => {
 return userdata
 })
 })
+//deleting user data 
+
+// exports.deleteProduct = functions.https.onCall(async (data, context) => {
+//   // check auth state
+//   if (!context.auth) {
+//     throw new functions.https.HttpsError(
+//       'unauthenticated', 
+//       'only authenticated users can vote up requests'
+//     );
+//   }
+  
+// return  userKeys.doc(context.auth.uid).update(
+//     { products: admin.firestore.FieldValue.arrayRemove() } ,
+//   ).then(() => console.log('done')).catch(err => console.log(err))
+  
+// })

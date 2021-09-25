@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import {AuthContext} from './Auth'
+import Login from './Login'
+import './App.css';
+import Layout from './Layout';
+
+
+
+import {BrowserRouter as  Router,Switch,Route} from "react-router-dom";
+import Navigation from './Navigation';
 import Home from './Home'
 import Settings from './Settings'
 import About from './About'
-import Login from './Login'
-import './App.css';
-import Navigation from './Navigation';
-import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
-import Loading from './Loading';
 
 
 
@@ -15,10 +18,10 @@ import Loading from './Loading';
 
 function App() {
   
-  const {  login,isLoading, loginCreateSwitch,createUser, authReady} = useContext(AuthContext)
+  const {  login, loginCreateSwitch,createUser, authReady} = useContext(AuthContext)
  
  
-  function submit() {
+  function signin() {
   let email = document.querySelector('#email').value 
   let password = document.querySelector('#password').value 
   loginCreateSwitch()
@@ -29,43 +32,29 @@ function App() {
  function signup() {
   let email = document.querySelector('#email').value 
   let password = document.querySelector('#password').value 
-  loginCreateSwitch()
-  createUser(email, password)
-  console.log('clicked at signup')
+  let passwordConfirmation = document.querySelector('#passwordConfirmation').value 
+  if(password === passwordConfirmation) {
+    loginCreateSwitch()
+    createUser(email, password)
+}
  }
  
 
   
   return (
+    <>
+    {authReady ? <Layout/>  : <Login signin ={signin} signup ={signup} /> }
+    </>
 
-  <div>
-      
-      {authReady !==null &&
-       <div>
-         {authReady === false && <Login signin={submit}
-                            signup={signup} 
-                            />}
-         {authReady && <div>
-        <Navigation className='umar'/>
-        <Router>
-             <Switch>
-               <Route path="/about">
-                 <About />
-               </Route>
-               <Route path="/Settings">
-                 <Settings />
-               </Route>
-               <Route exact path="/">
-                 <Home />
-               </Route>
-             </Switch>
-        </Router>
-      </div>}
-     </div>
-      }
-      
-      {authReady === null && <div><Loading/></div>}                      
-      </div>
+
+  // <div>
+  //   {authReady == null && <>
+  //     <h2 style={{textAlign:'center'}} >Loading</h2>
+  //   </>}
+  //   {authReady && <div><Layout/></div>  }
+  //   {authReady === false && <Login signin={signin} signup={signup} />}
+    
+  // </div>
   
 
   )

@@ -1,4 +1,6 @@
 import React from 'react'
+import  { useContext } from 'react';
+import {AuthContext} from "./Auth";
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import firebase from 'firebase'
@@ -8,7 +10,7 @@ import {useState} from "react"
 
 
 function Popup() {
-
+  const { firebaseCall } = useContext(AuthContext)
   const [show, setShow] = useState(false);
   var [formdata, setdata] = useState(" ")
   const handleClose = () => {
@@ -18,12 +20,14 @@ function Popup() {
       console.log(formdata)
       addProduct(formdata).then(e => {
         firebase.functions().httpsCallable('getdata')
+        setShow(false)
         console.log('data added')
+        firebaseCall()
       })
     }else {
       alert("all fields are required");
     }
-    setShow(false)
+    
   };
   const handleShow = () => setShow(true);
  function typing(e) {
@@ -65,7 +69,7 @@ function Popup() {
         </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={() => setShow(false)}>
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>Set</Button>

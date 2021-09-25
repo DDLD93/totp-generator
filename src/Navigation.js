@@ -23,7 +23,6 @@ function Navigation() {
       className="mr-auto my-2 my-lg-0"
       style={{ maxHeight: '150px' }}>
       <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="/notes">Settings</Nav.Link>
       <Nav.Link href="/about">About</Nav.Link>
       <Nav.Link onClick={logout} >Log Out</Nav.Link>
     </Nav>

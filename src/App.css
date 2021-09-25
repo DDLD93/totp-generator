@@ -161,10 +161,6 @@ body {
 .login-button:focus {
   background-color: hsla(201, 100%, 50%, 0.5);
 }
-.alert {
-  margin-left: 50%;
-  display: none;
-}
 .loginContainer {
  display: flex;
  justify-content: center;
@@ -179,8 +175,13 @@ body {
   align-items: center;
   background-color: whitesmoke;
   padding: 50px;
-  max-width: 450px;
-  min-width: 380px;
-  width: 70%;
-  
+  max-width: 600px;
+  min-width: 70%;
+}
+.alert {
+  font-size: 15px;
+}
+p b {
+  font-weight: bolder;
+  font-size: 20px;
 }
