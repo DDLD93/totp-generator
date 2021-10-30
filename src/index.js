@@ -1,14 +1,28 @@
 import React from 'react';
+import './App.css';
 import ReactDOM from 'react-dom';
 import App from './App';
 import AuthContextProvider from './Auth';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { createTheme, ThemeProvider} from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#311b92',
+    },
+    secondary: {
+      main: '#673ab7',
+    },
+  },
+});
 
 
 ReactDOM.render(
   <AuthContextProvider>
-
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </AuthContextProvider>
   ,
   document.getElementById('root')

@@ -7,9 +7,9 @@ export default function About() {
 
             <p><b>Security:</b> <em>Security key provided by the user 
                 the key is stored at backend (firebase firestore)security key is never transported to client side(frontEnd) token are generated in cloud 
-                       function which are only communicated back to client if request carry the corresponding UUID, </em></p>
+                       function which are only communicated back to client if request carry the corresponding Firebase AUTH UUID, </em></p>
 
-            <p><b>Technologies:</b> HTML CSS React Material-UI Firebase(Auth,Firetore and Cloud functions)</p>
+            <p><b>Technologies:</b> HTML CSS React Material-UI Firebase(Auth,Firetore and Cloud functions) <br /> <a href="https://www.npmjs.com/package/totp-generator">Bellstrand/ npm totp-generator</a>  </p>
 
             <p><b>Author: </b>Umar Adamu Jere</p> 
             <a href="https://twitter.com/0mar_jay">Twitter</a> <br />

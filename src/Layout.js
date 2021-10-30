@@ -1,21 +1,18 @@
 import React from 'react'
 import {BrowserRouter as  Router,Switch,Route} from "react-router-dom";
-import Navigation from './Navigation';
 import Home from './Home'
-import Settings from './Settings'
 import About from './About'
+import MenuAppBar from './Navigation';
 
 function Layout() {
     return (
         <div>
-            <Navigation className='umar'/>
+            
         <Router>
+             <MenuAppBar className='umar'/>
             <Switch>
-               <Route path="/about" component={About} />
-                
-               <Route path="/Settings" component={Settings} />
-                
-               <Route exact path="/" component={Home}/>
+                <Route exact path="/" component={Home}/>
+                <Route path="/about" component={About} />
             </Switch>
         </Router>
         </div>

@@ -1,41 +1,26 @@
 import { createContext, useState, useEffect } from 'react'
-import firebase from 'firebase';
+import firebase from './Firebase';
 
 
 export const AuthContext = createContext()
 
 export default function AuthContextProvider ({ children }) {
   const [user, setUser] = useState([])
-
-  // state to hold authentication status
-const [authReady, setAuthReady] = useState(false)
-const [isLoading, setisLoading] = useState(null)
-const [loginCreate, setloginCreate] = useState(false)
+  const [authReady, setAuthReady] = useState(null)
 
 
-
-  useEffect(() => {
-  firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user)
-        setAuthReady(true)
-        firebaseCall()
-        
-        // ...
-      } else {
-        setAuthReady(false)
-      }
-    });
   
+  useEffect(() => {
     setInterval(() => {
-    firebaseCall()
-      
+      firebaseCall()
     }, 30000);
-
-    return () => {
-      
+    
+      if(authReady) {
+        getdata().then(e => {
+          setUser(e.data)
+        }).catch((err) => console.log(err))
     }
-  }, [])
+  }, [authReady])
   const getdata = firebase.functions().httpsCallable('getdata');
 
 
@@ -45,21 +30,11 @@ const [loginCreate, setloginCreate] = useState(false)
     .then(user => {
       user ? setAuthReady(true) : setAuthReady(false)
       console.log('logged in', user);
-      firebaseCall()
     }).catch((err) => {
       console.log(err)
-      setloginCreate(false)
     })
   }
 
-  
-  function firebaseCall() {
-        console.log('getting data from firestore')
-      getdata().then(e => {
-        setUser(e.data)
-      }).catch((err) => console.log(err))
-        //setisLoading(false)
-  }
   const createUser = (email, password)=> {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
@@ -68,15 +43,15 @@ const [loginCreate, setloginCreate] = useState(false)
       // ...
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ..
     });
   }
-  const loginCreateSwitch = ()=> {
-    setloginCreate(!loginCreate)
-  }
-  
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setAuthReady(true)
+    } else {
+      setAuthReady(false)
+    }
+  }); 
 
   const logout = () => {
     firebase.auth().signOut().then(() => {
@@ -85,7 +60,21 @@ const [loginCreate, setloginCreate] = useState(false)
     })
   }
 
- const context = {user,loginCreate, firebaseCall,createUser, login, logout, loginCreateSwitch, authReady , isLoading}
+
+  function firebaseCall() {
+        console.log('getting data from firestore')
+        if(authReady) {
+          getdata().then(e => {
+            setUser(e.data)
+          }).catch((err) => console.log(err))
+        }
+        //setisLoading(false)
+  }
+  
+
+ 
+
+ const context = {user, firebaseCall,createUser, login, logout, authReady}
 
   return (
     <AuthContext.Provider value={context}>

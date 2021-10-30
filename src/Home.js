@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import {AuthContext} from "./Auth";
-import './App.css';
 import Container from 'react-bootstrap/Container'
 import { makeStyles } from '@material-ui/core/styles';
 import Cards from "./Cards"
 import Popup from './Popup'
-import {useEffect} from "react";
 
 
 
@@ -20,14 +18,6 @@ const useStyles = makeStyles({
 export default function Home({tokens}) {
   const classes = useStyles();
   const { user } = useContext(AuthContext)
-  useEffect(() => {
-
- 
-   
-      
-    
-
-    },[])
 
     return (
           
@@ -41,7 +31,7 @@ export default function Home({tokens}) {
 }
              )}
         
-        <Popup />
+        <Popup className="pop" />
       </Container>
       
     )
