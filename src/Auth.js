@@ -7,6 +7,7 @@ export const AuthContext = createContext()
 export default function AuthContextProvider ({ children }) {
   const [user, setUser] = useState([])
   const [authReady, setAuthReady] = useState(null)
+  const [signIn, setsignIn] = useState(true)
 
 
   
@@ -70,11 +71,11 @@ export default function AuthContextProvider ({ children }) {
         }
         //setisLoading(false)
   }
-  
+  const swap = () => setsignIn(!signIn)
 
  
 
- const context = {user, firebaseCall,createUser, login, logout, authReady}
+ const context = {signIn,user,authReady, firebaseCall,createUser,login, logout,swap}
 
   return (
     <AuthContext.Provider value={context}>
