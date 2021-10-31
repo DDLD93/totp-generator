@@ -63,12 +63,12 @@ export default function MenuAppBar() {
                 onClose={handleClose}
               >
                 <Link  to='/' >
-                  <MenuItem className='link' onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
                 </Link>
-                <Link className='link' to='/about' >
-                  <MenuItem className='link' onClick={handleClose}>About</MenuItem>
+                <Link to='/about' >
+                  <MenuItem onClick={handleClose}>About</MenuItem>
                 </Link>
-                <MenuItem className='link'  onClick={logout}>LogOut</MenuItem>
+                <MenuItem   onClick={logout}>LogOut</MenuItem>
               </Menu>
             </div>
           )}

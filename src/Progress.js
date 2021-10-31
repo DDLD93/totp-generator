@@ -8,8 +8,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     '& > * + *': {
       marginLeft: theme.spacing(2),
-      
-    },
+      },
    },
 
 }));
