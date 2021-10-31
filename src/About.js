@@ -2,7 +2,7 @@ export default function About() {
     
     return (
         <div style={{padding:'60px'}} >
-            <p> <b>Description:</b> <em>This app generate a 30sec TOTP token </em></p>
+            <p> <b>Description:</b> <em>This app generate a 30secs TOTP token </em></p>
 
 
             <p><b>Security:</b> <em>Security key provided by the user 
