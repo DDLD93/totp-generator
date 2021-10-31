@@ -26,4 +26,5 @@ yarn-debug.log*
 yarn-error.log*
 Firebase.js
 firebase.json
+/src/Firebase
 totp-generator.json
