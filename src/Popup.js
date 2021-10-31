@@ -47,7 +47,7 @@ function Popup() {
   }
     return (
         <>
-        <AddCircleSharpIcon style={{marginRight:'200px'}} id="button" color='secondary' variant="primary" onClick={handleShow}></AddCircleSharpIcon>
+        <AddCircleSharpIcon style={{position:'fixed',bottom:'10%',right:'5%',height:"60px",width:"60px"}} color='primary' variant="primary" onClick={handleShow}></AddCircleSharpIcon>
       
 
       <Modal
@@ -55,8 +55,9 @@ function Popup() {
         onHide={handleClose}
         backdrop="static"
         keyboard={true}
+        style={{paddingTop:'60px'}}
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Add Key</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -70,9 +71,9 @@ function Popup() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShow(false)}>
-            Close
+            Cancel
           </Button>
-          <Button variant="primary" onClick={handleClose}>Set</Button>
+          <Button variant="primary" onClick={handleClose}>Add</Button>
         </Modal.Footer>
       </Modal>
     </>

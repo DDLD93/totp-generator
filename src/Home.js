@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import {AuthContext} from "./Auth";
 import Container from 'react-bootstrap/Container'
 import { makeStyles } from '@material-ui/core/styles';
 import Cards from "./Cards"
 import Popup from './Popup'
+import Alert from 'react-bootstrap/Alert';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 
 
 
@@ -11,28 +14,64 @@ const useStyles = makeStyles({
   root :{
     display:'flex',
     flexDirection: 'column',
-    gap: '8px'
+    gap: '8px',
+    position: 'relative', 
+    zIndex: '1',
+    paddingTop:'90px',
+    paddingBottom:'20px'
+  },
+  alert:{
+    textAlign:'center',
+    position:'fixed',
+    bottom:'0%',
+    left:'50%'
+  },
+  stack:{
+    paddingLeft:'20px',
+    paddingTop:'100px'
   }
 })
 
-export default function Home({tokens}) {
+export default function Home() {
   const classes = useStyles();
   const { user } = useContext(AuthContext)
-
+  const [alert, setalert] = useState('none')
+  function copyToken(e) {
+    console.log('clicked token')
+    if (e.target.classList.contains('token')) {
+      navigator.clipboard.writeText(e.target.innerText)
+      setalert('inline')
+      setTimeout(() => {
+        setalert('none')
+      }, 2000);
+    }
+  }
+  
     return (
-          
-        <Container className={classes.root} style={{position: 'relative', zIndex: '1', paddingTop:'90px'}} >
-           {user.map(p => {
-             return (<Cards key={p.key}
-                    title = {p.product}
-                    user  = {p.user}
-                    token = {p.token}
-                    />)
-}
-             )}
-        
-        <Popup className="pop" />
-      </Container>
+          <div>
+
+              {user.length !== 0?<div><Container className={classes.root}>
+                {user.map(p => {
+                  return (<Cards key={p.key}
+                          title = {p.product}
+                          user  = {p.user}
+                          token = {p.token}
+                          copyToken={copyToken}
+                          />)}
+                  )}
+              <Popup className="pop" />
+              <Alert style={{display:alert}} className={classes.alert} variant='success'>copied</Alert>
+            </Container></div>:(
+              <Stack className={classes.stack} spacing={2}>
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+              </Stack>
+                )}
+          </div>
       
     )
     

@@ -14,16 +14,7 @@
   color: #007bff;
   font-family: 'Signika Negative', sans-serif;
 }
-#button {
-  position: fixed;
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  bottom: 50px;
-  right: auto;
-  left: 260px;
-  top: auto;
-}
+
 .umar {
   position: fixed;
 }
@@ -31,43 +22,18 @@
   font-size: xx-large;
   font-weight: 1000;
 }
-#card {
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 20rem;;
-  border: 1px solid #b1b1b1;
-  border-width: 2px;
-  box-shadow: 1px 1px 1px 0 lightgray inset;  
-  text-align: center;
-  align-items: center;
-  font-family: 'Times New Roman', Times, serif;
-}
-
-
-
-
-
 html,
 body {
   margin: 0;
 }
 
-
-
-
-.alert {
-  font-size: 15px;
-}
 p b {
   font-weight: bolder;
   font-size: 20px;
 }
-.pop{
-  color: aqua;
-}
-a{
+
+.alert{
   text-decoration: none;
-  color: #fff;
+  list-style: none;
+  color:red;
 }
