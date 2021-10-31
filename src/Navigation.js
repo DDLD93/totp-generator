@@ -1,28 +1,79 @@
-import React from 'react'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import {Link} from 'react-router-dom'
+import  { useContext } from 'react';
+import {AuthContext} from "./Auth";
 
 
-function Navigation() {
-    return (
-        <div style={{ marginBottom: '15px', position: 'fixed', zIndex: '2', width:'100vw'}}>
-<Navbar bg="primary" variant='dark' expand="lg">
-  <Navbar.Brand href="#">Authenticator</Navbar.Brand>
-  <Navbar.Toggle  />
-  <Navbar.Collapse id="navbarScroll">
-    <Nav
-      className="mr-auto my-2 my-lg-0"
-      style={{ maxHeight: '100px' }}
-      >
-      <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="/notes">Notes Keep</Nav.Link>
-      <Nav.Link href="/about">About</Nav.Link>
-    </Nav>
-    
-  </Navbar.Collapse>
-</Navbar>
-        </div>
-    )
+export default function MenuAppBar() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { logout } = useContext(AuthContext)
+
+  
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="fixed">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Link style={{color:'white',textDecoration:'none'}} to='/' >
+              CloudAuth
+            </Link>
+          </Typography>
+          {(
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <Link  to='/' >
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                </Link>
+                <Link to='/about' >
+                  <MenuItem onClick={handleClose}>About</MenuItem>
+                </Link>
+                <MenuItem   onClick={logout}>LogOut</MenuItem>
+              </Menu>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 }
-
-export default Navigation

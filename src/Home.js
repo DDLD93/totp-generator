@@ -1,63 +1,78 @@
-import './App.css';
+import React, { useContext,useState } from 'react';
+import {AuthContext} from "./Auth";
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import firebase from './Firebase'
+import { makeStyles } from '@material-ui/core/styles';
 import Cards from "./Cards"
 import Popup from './Popup'
-import {useEffect, useState} from "react"
+import Alert from 'react-bootstrap/Alert';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+
+
+
+const useStyles = makeStyles({
+  root :{
+    display:'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    position: 'relative', 
+    zIndex: '1',
+    paddingTop:'90px',
+    paddingBottom:'20px'
+  },
+  alert:{
+    textAlign:'center',
+    position:'fixed',
+    bottom:'0%',
+    left:'50%'
+  },
+  stack:{
+    paddingLeft:'20px',
+    paddingTop:'100px'
+  }
+})
 
 export default function Home() {
-  
-const [user, setuser] = useState([]);
-const data = []
-  
-    async function getMarker() {
-      
-      const snapshot = await firebase.firestore().collection('auth').get();
-      snapshot.docs.forEach(doc => data.push(doc.data()));
-      fetchdata(data)
-      return setuser(data)
+  const classes = useStyles();
+  const { user } = useContext(AuthContext)
+  const [alert, setalert] = useState('none')
+  function copyToken(e) {
+    console.log('clicked token')
+    if (e.target.classList.contains('token')) {
+      navigator.clipboard.writeText(e.target.innerText)
+      setalert('inline')
+      setTimeout(() => {
+        setalert('none')
+      }, 2000);
     }
-   
-function fetchdata(params) {
-  const node = JSON.stringify(params)
-  fetch(`http://3.68.169.52:4200/${node}`).then((res) =>{
-   res.json().then(e => {
-     console.log(e)
-     setuser(e)
-   })
-  })
-}
-  useEffect(() => {
-      getMarker()
-      setInterval(() => {
-        fetchdata(data)
-      }, 30000);
-    
-
-    },[])
-
+  }
+  
     return (
-        <div>
-        <Container style={{position: 'relative', zIndex: '1', paddingTop:'90px'}} fluid>
-        <Row>
-          <Col>
-          
-           {user.map((p, k) => {
-             return (<div >
-             <Cards title = {p.product}
-                    user  = {p.user}
-                    token = {p.code}
-                    key = {k}/>
-             </div>)
-             }
-             )}
-          </Col>
-        </Row>
-        <Popup />
-      </Container>
-       </div>
+          <div>
+
+              {user.length !== 0?<div><Container className={classes.root}>
+                {user.map(p => {
+                  return (<Cards key={p.key}
+                          title = {p.product}
+                          user  = {p.user}
+                          token = {p.token}
+                          copyToken={copyToken}
+                          />)}
+                  )}
+              <Popup className="pop" />
+              <Alert style={{display:alert}} className={classes.alert} variant='success'>copied</Alert>
+            </Container></div>:(
+              <Stack className={classes.stack} spacing={2}>
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+                <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
+              </Stack>
+                )}
+          </div>
+      
     )
     
 }

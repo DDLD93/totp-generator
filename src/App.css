@@ -1,14 +1,20 @@
+
+* {
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
 .token {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: xx-large;
-  font-weight: 500;
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: #007bff;
+  font-family: 'Signika Negative', sans-serif;
 }
-.button {
-  position: fixed;
-  bottom: 50px;
-  right: auto;
-  left: 310px;
-  top: auto;
-}
+
 .umar {
   position: fixed;
 }
@@ -16,144 +22,18 @@
   font-size: xx-large;
   font-weight: 1000;
 }
-#card {
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 20rem;;
-  border: 1px solid #b1b1b1;
-  border-width: 2px;
-  box-shadow: 1px 1px 1px 0 lightgray inset;  
-  text-align: center;
-  align-items: center;
-  font-family: 'Times New Roman', Times, serif;
-}
-
-#textarea {
-  -moz-appearance: textfield-multiline;
-  -webkit-appearance: textarea;
-  font: medium -moz-fixed;
-  font: -webkit-small-control;
-  text-align: center;
-  height: 50px;
-  overflow: auto;
-  padding: 15px;
-  border-style: none;
-  width: -webkit-fill-available;
-}
-
-#input {
-  -moz-appearance: textfield;
-  text-align: center;
-  -webkit-appearance: textfield;
-  background-color: white;
-  background-color: -moz-field;
-  font-weight: bolder;
-  font: -moz-field;
-  font-family: monospace;
-  font:bolder;
-  font-size: 20px;
-  border-bottom: 1px solid black;
-  padding: 2px 3px;
-  margin-bottom: 0;
-  width: -webkit-fill-available; 
-  height: 30px;   
-}
-
-#textarea[contenteditable="true"] {
-  width:-webkit-fill-available;
-  height:150px;
-  background: rgb(214, 214, 214);
-  text-align: start;
-  padding: 1px 2px;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
-
-* {
-  box-sizing: border-box;
-  font-family: 'Quicksand', sans-serif;
-}
-
 html,
 body {
   margin: 0;
 }
 
-.full-screen-container {
-  height: 100vh;
-  width: 100vw;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+p b {
+  font-weight: bolder;
+  font-size: 20px;
 }
 
-.login-container {
-  background-color: hsla(201, 100%, 6%, 0.6);
-  padding: 50px 30px;
-  min-width: 400px;
-  width: 50%;
-  max-width: 600px;
-}
-
-.login-title {
-  color: #fff;
-  text-align: center;
-  margin: 0;
-  margin-bottom: 40px;
-  font-size: 2.5em;
-  font-weight: normal;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.input-group label {
-  color: #fff;
-  font-weight: lighter;
-  font-size: 1.5em;
-  margin-bottom: 7px;
-}
-
-.input-group input {
-  font-size: 1.5em;
-  padding: 0.1em 0.25em;
-  background-color: hsla(201, 100%, 91%, 0.3);
-  border: 1px solid hsl(201, 100%, 6%);
-  outline: none;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: lighter;
-}
-
-.input-group input:focus {
-  border: 1px solid hsl(201, 100%, 50%);
-}
-
-.login-button {
-  padding: 10px 30px;
-  width: 100%;
-  border-radius: 5px;
-  background: hsla(201, 100%, 50%, 0.1);
-  border: 1px solid hsl(201, 100%, 50%);
-  outline: none;
-  font-size: 1.5em;
-  color: #fff;
-  font-weight: lighter;
-  margin-top: 20px;
-  cursor: pointer;
-}
-
-.login-button:hover {
-  background-color: hsla(201, 100%, 50%, 0.3);
-}
-
-.login-button:focus {
-  background-color: hsla(201, 100%, 50%, 0.5);
+.alert{
+  text-decoration: none;
+  list-style: none;
+  color:red;
 }

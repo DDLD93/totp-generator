@@ -1,5 +1,5 @@
 {
-  "short_name": "Authenticator App",
+  "short_name": "Cloud-Auth",
   "name": "Online Authenticator App",
   "icons": [
     {
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#311b92",
   "background_color": "#ffffff"
 }

@@ -1,26 +1,56 @@
-import React, { useRef } from 'react'
-import Card from 'react-bootstrap/Card'
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from 'react-bootstrap/Card';
+import Progress from './Progress';
+import ClearIcon from '@mui/icons-material/Clear';
 
-function Cards(props) {
-  const token = useRef(null)
-    function copy() {
-    let tokens = token.current.innerText
-        navigator.clipboard.writeText(tokens)
-            alert("Copied the text: " + tokens);
-      }
+
+const useStyles = makeStyles({
+    root: {
+      maxWidth: '250px',
+      boxShadow: '5px 10px 20px 0px #cbc4d7'
+    },
+    body: {
+        padding:'0.7rem'
+    },
+    title: {
+        fontSize: '25px',
+        marginBottom: '0.50rem',
+        fontWeight: '800px',
+        letterSpacing: '1px'
+    },
+    subtitle: {
+        fontSize: '15px'
+    },
+    token: {
+        letterSpacing: '7px'
+    },
+    progress: {
+        position: 'absolute',
+        color: 'red',
+        backgroundColor: 'red'
+    }
+  });
+function Cards({title,user,token,copyToken}) {
+    const classes = useStyles();
+    
+   
+   
     return (
-        <div>
-            <Card onClick={copy} style={{ width: '18rem', marginTop: '3px' }}>
-            <Card.Body>
-                <Card.Title className= "title">{props.title}</Card.Title>
-                <Card.Subtitle style={{fontFamily: 'italic'}} className="mb-2 text-muted">{props.user}</Card.Subtitle>
-                <Card.Text ref={token} className="token">
-                    {props.token}
-                </Card.Text>
+        
+        <Card className={classes.root} variant="outlined"
+            onClick={copyToken}>
+            <Card.Body className={classes.body}>
+                <div style={{display:'flex', justifyContent:"space-between"}}>
+                <Card.Title className={classes.title}>{title}</Card.Title>
+                <ClearIcon/>
+                </div>
+                <Card.Subtitle className={classes.subtitle}>{user}</Card.Subtitle>
+                <Card.Text className='token' >{token} <Progress/></Card.Text>
             </Card.Body>
-            </Card>
-        </div>
+            
+        </Card>
+        
     )
 }
-
 export default Cards

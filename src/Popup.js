@@ -1,34 +1,33 @@
 import React from 'react'
+import  { useContext } from 'react';
+import {AuthContext} from "./Auth";
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
-import firebase from "./Firebase"
-import {app} from "./Firebase"
+import firebase from 'firebase'
+import AddCircleSharpIcon from '@material-ui/icons/AddCircleSharp';
 import Button from 'react-bootstrap/Button'
 import {useState} from "react"
 
-function Popup() {
 
+function Popup() {
+  const { firebaseCall } = useContext(AuthContext)
   const [show, setShow] = useState(false);
   var [formdata, setdata] = useState(" ")
-  const db = firebase.firestore(app).collection("auth");
   const handleClose = () => {
     if (formdata.user !== undefined  && formdata.product !== undefined && formdata.key !== undefined) {
-      console.log(formdata.user);
-      db.doc().set({
-        product: formdata.product,
-        user: formdata.user,
-        key: formdata.key
-    })
-    .then(() => {
-        console.log("Document successfully written!");
-    })
-    .catch((error) => {
-        console.error("Error writing document: ", error);
-    });
+      
+      const addProduct = firebase.functions().httpsCallable('addProduct');
+      console.log(formdata)
+      addProduct(formdata).then(e => {
+        firebase.functions().httpsCallable('getdata')
+        setShow(false)
+        console.log('data added')
+        firebaseCall()
+      })
     }else {
       alert("all fields are required");
     }
-    setShow(false)
+    
   };
   const handleShow = () => setShow(true);
  function typing(e) {
@@ -48,17 +47,17 @@ function Popup() {
   }
     return (
         <>
-      <Button className="button" variant="primary" onClick={handleShow}>
-        Add
-      </Button>
+        <AddCircleSharpIcon style={{position:'fixed',bottom:'10%',right:'5%',height:"60px",width:"60px"}} color='primary' variant="primary" onClick={handleShow}></AddCircleSharpIcon>
+      
 
       <Modal
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={true}
+        style={{paddingTop:'60px'}}
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Add Key</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -71,10 +70,10 @@ function Popup() {
         </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
+          <Button variant="secondary" onClick={() => setShow(false)}>
+            Cancel
           </Button>
-          <Button variant="primary" onClick={handleClose}>Set</Button>
+          <Button variant="primary" onClick={handleClose}>Add</Button>
         </Modal.Footer>
       </Modal>
     </>
