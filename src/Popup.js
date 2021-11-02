@@ -1,18 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 import  { useContext } from 'react';
 import {AuthContext} from "./Auth";
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
-import firebase from 'firebase'
+import firebase from './Firebase'
 import AddCircleSharpIcon from '@material-ui/icons/AddCircleSharp';
 import Button from 'react-bootstrap/Button'
-import {useState} from "react"
 
 
 function Popup() {
   const { firebaseCall } = useContext(AuthContext)
   const [show, setShow] = useState(false);
-  var [formdata, setdata] = useState(" ")
+  var [formdata, setdata] = useState('')
   const handleClose = () => {
     if (formdata.user !== undefined  && formdata.product !== undefined && formdata.key !== undefined) {
       

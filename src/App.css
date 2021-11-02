@@ -1,9 +1,4 @@
 
-* {
-  box-sizing: border-box;
-  font-family: 'Quicksand', sans-serif;
-}
-
 .token {
   display: flex;
   justify-content: space-between;
@@ -15,25 +10,3 @@
   font-family: 'Signika Negative', sans-serif;
 }
 
-.umar {
-  position: fixed;
-}
-.title {
-  font-size: xx-large;
-  font-weight: 1000;
-}
-html,
-body {
-  margin: 0;
-}
-
-p b {
-  font-weight: bolder;
-  font-size: 20px;
-}
-
-.alert{
-  text-decoration: none;
-  list-style: none;
-  color:red;
-}

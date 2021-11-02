@@ -3,8 +3,8 @@ import './App.css';
 import ReactDOM from 'react-dom';
 import App from './App';
 import AuthContextProvider from './Auth';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { createTheme, ThemeProvider} from '@mui/material/styles';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const theme = createTheme({
   palette: {
@@ -21,7 +21,7 @@ const theme = createTheme({
 ReactDOM.render(
   <AuthContextProvider>
     <ThemeProvider theme={theme}>
-      <App />
+      <App/>
     </ThemeProvider>
   </AuthContextProvider>
   ,

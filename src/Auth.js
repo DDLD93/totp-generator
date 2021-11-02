@@ -13,8 +13,8 @@ export default function AuthContextProvider ({ children }) {
   
   useEffect(() => {
     setInterval(() => {
-      firebaseCall()
-    }, 30000);
+      if(authReady) firebaseCall()
+      }, 30000);
     
       if(authReady) {
         getdata().then(e => {

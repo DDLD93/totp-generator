@@ -43,7 +43,7 @@ function Cards({title,user,token,copyToken}) {
             <Card.Body className={classes.body}>
                 <div style={{display:'flex', justifyContent:"space-between"}}>
                 <Card.Title className={classes.title}>{title}</Card.Title>
-                <ClearIcon/>
+                <ClearIcon style={{visibility:'hidden'}} />
                 </div>
                 <Card.Subtitle className={classes.subtitle}>{user}</Card.Subtitle>
                 <Card.Text className='token' >{token} <Progress/></Card.Text>

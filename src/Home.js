@@ -7,6 +7,8 @@ import Popup from './Popup'
 import Alert from 'react-bootstrap/Alert';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import Grow from '@mui/material/Grow';
+import Box from '@mui/material/Box';
 
 
 
@@ -36,6 +38,7 @@ export default function Home() {
   const classes = useStyles();
   const { user } = useContext(AuthContext)
   const [alert, setalert] = useState('none')
+  const [checked, setChecked] = useState(true);
   function copyToken(e) {
     console.log('clicked token')
     if (e.target.classList.contains('token')) {
@@ -50,18 +53,31 @@ export default function Home() {
     return (
           <div>
 
-              {user.length !== 0?<div><Container className={classes.root}>
-                {user.map(p => {
-                  return (<Cards key={p.key}
-                          title = {p.product}
-                          user  = {p.user}
-                          token = {p.token}
-                          copyToken={copyToken}
-                          />)}
-                  )}
-              <Popup className="pop" />
-              <Alert style={{display:alert}} className={classes.alert} variant='success'>copied</Alert>
-            </Container></div>:(
+              {user.length !== 0?
+              
+            <Box sx={{ display: 'flex' }}>
+              {/* Conditionally applies the timeout prop to change the entry speed. */}
+              <Grow
+                in={checked}
+                style={{ transformOrigin: '0 0 0' }}
+                {...(checked ? { timeout: 1000 } : {})}>
+                  <div>
+                  <Container className={classes.root}>
+                    {user.map(p => {
+                      return (<Cards key={p.key}
+                              title = {p.product}
+                              user  = {p.user}
+                              token = {p.token}
+                              copyToken={copyToken}
+                              />)}
+                      )}
+                  <Popup />
+                  <Alert style={{display:alert}} className={classes.alert} variant='success'>copied</Alert>
+                </Container>
+                </div>
+              </Grow>
+            </Box>
+            :(
               <Stack className={classes.stack} spacing={2}>
                 <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
                 <Skeleton animation="wave" variant="rectangular" width={210} height={118} />
